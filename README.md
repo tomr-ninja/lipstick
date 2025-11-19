@@ -1,4 +1,4 @@
-# lipstick
+# 💄 lipstick
 
 This is a simple audio codec for VoIP applications. It mostly uses outdated techniques, but on the flip side, it has
 zero dependencies.
@@ -14,12 +14,12 @@ Golang's cross-compilation and avoid complicating the build process in general.
 If you need a high-quality production-ready codec, consider using [Opus](https://github.com/hraban/opus) instead.
 
 > [!WARNING]
-> Lipstick is unstable and experimental. I won't release a version until it's tested, but I am willing to make
+> lipstick is unstable and experimental. I won't release a version until it's tested, but I am willing to make
 > breaking changes before 1.0.
 
 ## Compression
 
-Lipstick achieves ~3X compression ratio for 16 kHz mono voice data. A 20ms frame is ~200 bytes.
+lipstick achieves ~3X compression ratio for 16 kHz mono voice data. A 20ms frame is ~200 bytes.
 That is ~5 times worse compared to Opus on 'Application: VoIP' quality setting, but still well below 
 [maximum safe UDP packet size](https://stackoverflow.com/questions/1098897/what-is-the-largest-safe-udp-packet-size-on-the-internet).
 So it's not an amazing compression, but it would technically work in production in real-time.
