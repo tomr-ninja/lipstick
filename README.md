@@ -26,17 +26,17 @@ So it's not an amazing compression, but it would technically work in production 
 
 ## Testing
 
-For the sake of leaving the `go.mod` file clean, tests are moved to a separate module (`./test`)
+For the sake of keeping the `go.mod` file clean, tests are moved to a separate module (`./test`)
 
 ```shell
 cd test
 go test -v # -v for verbose output with logs/stats
 ```
 
-Tests are run using wav files provided by the user. Place your files in `test/testdata` directory; they must be
+Tests are run using WAV files provided by the user. Place your files in `test/testdata` directory; they must be
 **16 bit mono** uncompressed WAV files.
-The test will produce transcoded (raw -> lipstick OR opus -> raw) wav files in `test/out` directory. You can just
-listen to them to compare the quality of raw, lipstick-encoded and opus-encoded audio.
+The test will produce transcoded (raw -> lipstick OR Opus -> raw) WAV files in `test/out` directory. You can just
+listen to them to compare the quality of raw, lipstick-encoded and Opus-encoded audio.
 
 You can use services like [this](https://cloudconvert.com/wav-converter) to convert your files to the required format.
 
@@ -46,7 +46,7 @@ results.
 
 ## Benchmark
 
-There are some allocations happening that should be avoidable; anyway, the performance is decent.
+There are some avoidable allocations; nonetheless, performance is decent.
 
 ```
 goos: darwin
