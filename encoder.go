@@ -9,8 +9,8 @@ import (
 )
 
 const (
-	magicHeader  = "BBRT"
-	silentHeader = "BBRS"
+	magicHeader  = "LPSK"
+	silentHeader = "LPSS"
 )
 
 // Encoder implements Encoder
