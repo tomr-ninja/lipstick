@@ -44,7 +44,7 @@ func testCodecsWithFile(t *testing.T, wavPath string) {
 	}
 
 	for _, c := range codecs {
-		t.Run(c.codecName, func(t *testing.T) {
+		t.Run(c.name, func(t *testing.T) {
 			bytesTotal := 0
 			biggestFrame := 0
 
@@ -65,7 +65,7 @@ func testCodecsWithFile(t *testing.T, wavPath string) {
 			}
 
 			originalFileName := path.Base(wavPath)
-			transcodedFileName := fmt.Sprintf("%s.%s.wav", originalFileName, c.codecName)
+			transcodedFileName := fmt.Sprintf("%s.%s.wav", originalFileName, c.name)
 			require.NoError(t, WriteWav(fmt.Sprintf("out/%s", transcodedFileName), transcoded, sampleRate))
 
 			encodedBitrate := calcBitRate(bytesTotal, audioLength)
@@ -79,9 +79,9 @@ func testCodecsWithFile(t *testing.T, wavPath string) {
 }
 
 type codec struct {
-	codecName string
-	enc       func(from []float32, to []byte) (int, error)
-	dec       func(from []byte, to []float32) error
+	name string
+	enc  func(from []float32, to []byte) (int, error)
+	dec  func(from []byte, to []float32) error
 }
 
 func prepareLipstick(_ testing.TB, frameSize int) codec {
@@ -89,9 +89,9 @@ func prepareLipstick(_ testing.TB, frameSize int) codec {
 	dec := lipstick.NewDecoder(LipstickLPCOrder, frameSize)
 
 	return codec{
-		codecName: "lipstick",
-		enc:       enc.Encode,
-		dec:       dec.Decode,
+		name: "lipstick",
+		enc:  enc.Encode,
+		dec:  dec.Decode,
 	}
 }
 
@@ -103,8 +103,8 @@ func prepareOpus(t testing.TB, sampleRate int) codec {
 	require.NoError(t, err)
 
 	return codec{
-		codecName: "opus",
-		enc:       enc.EncodeFloat32,
+		name: "opus",
+		enc:  enc.EncodeFloat32,
 		dec: func(from []byte, to []float32) error {
 			_, err := dec.DecodeFloat32(from, to)
 			return err

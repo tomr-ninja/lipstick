@@ -43,3 +43,18 @@ You can use services like [this](https://cloudconvert.com/wav-converter) to conv
 I really don't know yet how to measure audio quality quantitatively; I guess there are some metrics out there,
 but as of now I don't have any intention to implement them. I've tried things like MSE, but wasn't happy with the
 results.
+
+## Benchmark
+
+There are some allocations happening that should be avoidable; anyway, the performance is decent.
+
+```
+goos: darwin
+goarch: arm64
+pkg: github.com/tomr-ninja/lipstick/test
+cpu: Apple M3 Pro
+BenchmarkCodecs/lipstick/encode-11        115600             10607 ns/op            3416 B/op         17 allocs/op
+BenchmarkCodecs/lipstick/decode-11        125970              9651 ns/op            3120 B/op         10 allocs/op
+BenchmarkCodecs/opus/encode-11              9814            128441 ns/op               0 B/op          0 allocs/op
+BenchmarkCodecs/opus/decode-11            242533              4893 ns/op               0 B/op          0 allocs/op
+```
